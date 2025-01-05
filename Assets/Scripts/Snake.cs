@@ -1,3 +1,5 @@
+using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Snake : MonoBehaviour
@@ -13,28 +15,42 @@ public class Snake : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
+            Debug.Log("Up is pressed");
             currentDirection = up;
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.A))
         {
+            Debug.Log("Left is pressed");
             currentDirection = left;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
+            Debug.Log("Right is pressed");
             currentDirection = down;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
+            Debug.Log("Down is pressed");
             currentDirection = right;
         }
     }
 
     public void FixedUpdate()
     {
-        
+        float currentX = snakeTransform.position.x;
+        float currentY = snakeTransform.position.y;
+        snakeTransform.position = new Vector3(
+            Mathf.Round(currentX + currentDirection.x),
+            Mathf.Round(currentY + currentDirection.y),
+            0
+        );
+
+        Debug.Log(snakeTransform.position);
+        Debug.Log("Current direction: " + currentDirection);
+
     }
 
 }
